@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<title>Awesome Javascript</title>
+	</head>
+	<script src='popup.js'></script>
+	<body>
+		<form>
+			Firstname: <input id='firstname' type='text' required></br>
+			Name: <input id='name' type='text' required></br>
+			Age: <input id='age' type='number' min='1' max='1000000' required></br>
+			Phone: <input id='phone' type='tel' required></br>
+			Email: <input id='email' type='email' required></br>
+			Student at 42 ? : <input id='student' type='checkbox'></br>
+			Gender : <input id='gender_male' name='gender' type='radio' value='Male' required>Male <input id='gender_female' name='gender' type='radio' value='Female' required>Female <input id='gender_other' name='gender' type='radio' value='Other' required>Other </br>
+			<button type='submit' onclick='displayFormContents();'>Run that sexy Javascript!</button>
+		</form>
+	</body>
+</html>
