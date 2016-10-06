@@ -10,11 +10,11 @@ class Text(str):
 class Elem(object):
 
     def __init__(self, tag="div", attr={}, content=None, tag_type='double'):
-        if type(content) not in [Text, Elem, list, None.__class__]:
+        if not isinstance(content, (Text, Elem, list, None.__class__)):
             raise self.ValidationError()
-        if type(content) == list:
+        if isinstance(content, list):
             for node in content:
-                if type(node) not in [Text, Elem]:
+                if not isinstance(node, (Text, Elem)):
                     raise self.ValidationError()
         self.type = tag_type
         self.indent_level = 0
@@ -48,7 +48,7 @@ class Elem(object):
         if self.type != 'double':
             return "%s<%s%s />" % ("  " * (self.indent_level - 1), self.tag, self.generate_attr_html())
         if mode == 'open':
-            return "<%s%s>" % (self.generate_attr_html(), self.tag)
+            return "<%s%s>" % (self.tag, self.generate_attr_html())
         else:
             if self.generate_content_html():
                 return "\n%s</%s>" % ("  " * self.indent_level, self.tag)
@@ -63,7 +63,7 @@ class Elem(object):
             return "%s%s" % (self.get_tag('open'), content_string)
 
     def add_content(self, new_content):
-        if isinstance(new_content, Elem) or isinstance(new_content, Text):
+        if isinstance(new_content, (Elem, Text)):
             self.content.append(new_content)
         else:
             raise self.ValidationError()
