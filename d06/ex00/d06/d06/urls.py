@@ -16,5 +16,5 @@ Including another URLconf
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^$', include('exos.urls')),
+    url(r'', include('exos.urls')),
 ]

@@ -10,11 +10,6 @@ from django.conf import settings
 def main(request):
     form = TipForm()
 
-    if request.method == 'POST':
-        form = TipForm(request.POST)
-        if form.is_valid():
-            tip = Tip(content=request.POST.get('content'), auteur=request.user)
-            tip.save()
     response = render(request, 'exos/base.html')
     if not request.COOKIES.get('username'):
         random_user = choice(settings.USER_POOL)
@@ -22,7 +17,11 @@ def main(request):
         response = render(request, 'exos/base.html')
         response.set_cookie('username', random_user, max_age=42)
     if request.user.is_authenticated():
-        #tips = Tip.objects.filter(auteur=request.user)
+        if request.method == 'POST':
+            tmpform = TipForm(request.POST)
+            if tmpform.is_valid():
+                tip = Tip(content=request.POST.get('content'), auteur=request.user)
+                tip.save()
         tips = Tip.objects.all()
         return render(request, 'exos/base.html', {'tips': tips, 'form': form})
     return response

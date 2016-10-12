@@ -22,19 +22,22 @@ def main(request):
         form = TipForm()
 
         # Can upvote/downvote/post/delete
-        if request.method == 'POST':
-            if request.POST.get('up') or request.POST.get('down'):
-                tip = Tip.objects.get(pk=request.POST.get('up') or request.POST.get('down'))
-                if request.POST.get('up'):
-                    tip.upvote(request.user)
-                else:
-                    tip.downvote(request.user)
-            if request.POST.get('delete'):
-                Tip.objects.get(pk=request.POST.get('delete')).delete()
-            form = TipForm(request.POST)
-            if form.is_valid():
-                tip = Tip(content=request.POST.get('content'), auteur=request.user)
-                tip.save()
+        try:
+            if request.method == 'POST':
+                if request.POST.get('up') or request.POST.get('down'):
+                    tip = Tip.objects.get(pk=request.POST.get('up') or request.POST.get('down'))
+                    if request.POST.get('up'):
+                        tip.upvote(request.user)
+                    else:
+                        tip.downvote(request.user)
+                if request.POST.get('delete'):
+                    Tip.objects.get(pk=request.POST.get('delete')).delete()
+                tmpform = TipForm(request.POST)
+                if tmpform.is_valid():
+                    tip = Tip(content=request.POST.get('content'), auteur=request.user)
+                    tip.save()
+        except Tip.DoesNotExist:
+            pass
         # Can see all articles
         tips = Tip.objects.all()
         return render(request, 'exos/base.html', {'tips': tips, 'form': form})

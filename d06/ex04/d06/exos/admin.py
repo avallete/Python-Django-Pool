@@ -8,4 +8,3 @@ class AUserAdmin(UserAdmin):
     pass
 
 admin.site.register(models.AUser, UserAdmin)
-admin.site.register(models.Tip)

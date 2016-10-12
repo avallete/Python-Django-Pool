@@ -18,6 +18,9 @@
                 <button class="btn btn-default btn-xs" type="submit" name="up" value="{{tip.pk}}" aria-label="Left Align">
                     <span class="glyphicon glyphicon-arrow-up"></span>{{tip.upvotes.count}}
                 </button>
+                <button class="btn btn-default btn-xs" type="submit" name="down" value="{{tip.pk}}" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-arrow-down"></span>{{tip.downvotes.count}}
+                </button>
                 {% if  perms.exos.delete_tip or tip.auteur == request.user %}
                 <button class="btn btn-default btn-xs" type="submit" name="delete" value="{{tip.pk}}" aria-label="Left Align">
                     <span class="glyphicon glyphicon-remove text-danger"></span>Delete

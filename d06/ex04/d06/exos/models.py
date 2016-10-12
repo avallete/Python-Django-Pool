@@ -21,10 +21,9 @@ class Tip(models.Model):
             self.upvotes.add(user)
 
     def downvote(self, user):
-        if user.has_perm('downvote_tip') or self.auteur == user:
-            if self.upvotes.filter(id=user.id).count():
-                self.upvotes.remove(user)
-            if self.downvotes.filter(id=user.id).count():
-                self.downvotes.remove(user)
-            else:
-                self.downvotes.add(user)
+        if self.upvotes.filter(id=user.id).count():
+            self.upvotes.remove(user)
+        if self.downvotes.filter(id=user.id).count():
+            self.downvotes.remove(user)
+        else:
+            self.downvotes.add(user)
