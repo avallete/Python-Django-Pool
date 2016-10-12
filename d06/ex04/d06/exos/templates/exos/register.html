@@ -1,0 +1,16 @@
+{% extends 'exos/base.html' %}
+
+{% block title %}
+<title>Register</title>
+{% endblock %}
+
+{% block content %}
+<h1>Register</h1>
+<div class="container-fluid">
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

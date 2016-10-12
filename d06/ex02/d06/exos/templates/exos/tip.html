@@ -1,0 +1,16 @@
+<div class="display3">
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% for tip in tips %}
+    <hr class="m-y-2">
+    <div class="panel panel-default">
+        <div class="panel-heading">By: {{tip.auteur}} at {{tip.date}}</div>
+        <div class="panel-body">
+            <p>Content: {{tip.content}}</p>
+        </div>
+    </div>
+{% endfor %}

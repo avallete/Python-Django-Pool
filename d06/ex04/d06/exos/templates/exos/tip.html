@@ -1,0 +1,29 @@
+<div class="display3">
+    <form method="post" name="new_form">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% for tip in tips %}
+    <hr class="m-y-2">
+    <div class="panel panel-default">
+        <div class="panel-heading">By: {{tip.auteur}} at {{tip.date}}</div>
+        <div class="panel-body">
+            <p>Content: {{tip.content}}</p>
+        </div>
+        <div class="panel-footer">
+            <form method="post">
+                {% csrf_token %}
+                <button class="btn btn-default btn-xs" type="submit" name="up" value="{{tip.pk}}" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-arrow-up"></span>{{tip.upvotes.count}}
+                </button>
+                {% if  perms.exos.delete_tip or tip.auteur == request.user %}
+                <button class="btn btn-default btn-xs" type="submit" name="delete" value="{{tip.pk}}" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-remove text-danger"></span>Delete
+                </button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endfor %}

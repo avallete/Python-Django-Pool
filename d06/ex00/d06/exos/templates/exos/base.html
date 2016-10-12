@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'exos/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'exos/css/bootstrap-theme.min.css'%}">
+    {% endblock %}
+    {% block title %}
+    <title>Home</title>
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        {% block header %}
+        <div class="page-header">
+            <nav><h1>Hello {{request.COOKIES.username}} !</h1></nav>
+        </div>
+        {% endblock %}
+        <div class="jumbotron">
+            {% block content %}
+                <h1>I'm happy to see you again !</h1>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

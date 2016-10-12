@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'exos/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'exos/css/bootstrap-theme.min.css'%}">
+    {% endblock %}
+    {% block title %}
+        <title>Home</title>
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        {% block header %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">Hello {% if request.user.username %}{{request.user.username}}
+                            {% else %}{{request.COOKIES.username}} !{% endif %}</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if not request.user.is_authenticated %}
+                                <li><a href="/register">Register</a></li>
+                                <li><a href="/login">Login</a></li>
+                            {% else %}
+                                <li><a href="/logout">Logout</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        {% endblock %}
+        <div class="jumbotron">
+            {% block content %}
+                <h1>I'm happy to see you again !</h1>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
