@@ -183,4 +183,5 @@ BOOTSTRAP3 = {
     },
 }
 
-MEDIA_ROOT = os.path.join("%s", 'media')
+MEDIA_ROOT = os.path.join("%s" % BASE_DIR, 'media')
+MEDIA_URL = "/media/"

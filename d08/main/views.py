@@ -4,7 +4,20 @@ from django.views.generic import View
 from .forms import ImageUploadForm
 
 class HomePage(View):
-    form = ImageUploadForm()
+    form = ImageUploadForm
 
     def get(self, request):
-        return render(request, 'main/homepage.html', {'form': self.form})
+        f = self.form(request.POST)
+        return render(request, 'main/homepage.html', {'form': f})
+
+    def post(self, request):
+        f = self.form(request.POST)
+        try:
+            if f.is_valid():
+                f.save()
+            print("Form is valid: %s" % request.POST)
+            return redirect('/')
+        except ValueError as e:
+            print("An error occured")
+            print(e)
+            return render(request, 'main/homepage.html', {'form': f})
